@@ -10,8 +10,6 @@ const _         = require('underscore');
 var Department  = app.models.Department;
 var Grocery     = app.models.Grocery;
 let middlewarez = require(path.resolve(__dirname, '../like-middleware-helper'));
-const Raven = require('raven');
-Raven.config('https://6c8ba2737aae4d81908677e4dba9be3f:26c83aa1a38a42cdbf0beea41a82cacf@sentry.io/231031').install();
 
 // :todo make it more lightWeight
 // :todo some of fucntionality are duplicated
@@ -33,7 +31,6 @@ exports.departmentsList = async (req, res, next) => {
      // console.log(response);
 
   } catch (e) {
-    Raven.captureException(e);
     //this will eventually be handled by your error handling middleware
     next(e) 
   }
@@ -126,7 +123,6 @@ exports.getDepartment = async (req, res, next) => {
 
 
   } catch (e) {
-     Raven.captureException(e);
     //this will eventually be handled by your error handling middleware
     next(e) 
   }

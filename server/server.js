@@ -14,6 +14,9 @@ const express      = require('express');
 
 const errorhandler = require('errorhandler');
 
+require("dotenv").config();
+
+
 const app          = module.exports = loopback();
 
 // i use this name in order to keep away from name convig
@@ -70,7 +73,6 @@ try {
   // console.log(config);
 } catch (err) {
   console.trace(err);
-  Raven.captureException(err);
   process.exit(1); // fatal
 }
 

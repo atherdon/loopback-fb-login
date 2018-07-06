@@ -17,9 +17,6 @@ let dropdown_departments = require(path.resolve(__dirname, '../grocery-middlewar
 const Grocery = app.models.Grocery;
 const User    = app.models.user;
 
-const Raven = require('raven');
-Raven.config('https://6c8ba2737aae4d81908677e4dba9be3f:26c83aa1a38a42cdbf0beea41a82cacf@sentry.io/231031').install();
-
    
 
 exports.changeName = async (req, res, next) => {
@@ -32,7 +29,6 @@ exports.changeName = async (req, res, next) => {
 
       grocery = await Grocery.findById(groceryId);
     } catch (e) {
-       Raven.captureException(e);
         //this will eventually be handled by your error handling middleware
         next(e) 
     }
@@ -68,35 +64,25 @@ exports.cloneGrocery = async (req, res, next) => {
     var groceryId = req.params.groceryId;  
     
     let grocery
+    let cloned
     try {
       grocery = await Grocery.findById(groceryId, Grocery.queryNotHidden());
-
-    } catch (e) {
-       Raven.captureException(e);
-      //this will eventually be handled by your error handling middleware
-      next(e) 
-    }
-
-    let cloned
-    try {   
       var newObject = Grocery.getObjectForClone(grocery);
       cloned = await Grocery.create(newObject);
+      var options = {
+        type  : 'attach',
+        field : 'groceryIds',
+        userId: userId,
+        secondArray: [ cloned.id ]
+      };
+      User.proceed(options)
+      res.redirect('/afterclone');
 
     } catch (e) {
-       Raven.captureException(e);
       //this will eventually be handled by your error handling middleware
-      next(e) 
+      // res.redirect('/afterclone');
+      next(e); 
     }
-
-    var options = {
-      type  : 'attach',
-      field : 'groceryIds',
-      userId: userId,
-      secondArray: [ cloned.id ]
-    };
-    User.proceed(options);
-
-    res.redirect('/afterclone');
 };
 
 //:todo #182
@@ -134,7 +120,6 @@ exports.postCloneForm = async (req, res, next) => {
       grocery = await Grocery.findById(groceryId, Grocery.queryNotHidden());
 
     } catch (e) {
-       Raven.captureException(e);
         //this will eventually be handled by your error handling middleware
         next(e) 
     }
@@ -148,7 +133,6 @@ exports.postCloneForm = async (req, res, next) => {
       // console.log(cloned);
       // console.log(userId)
     } catch (e) {
-       Raven.captureException(e);
         //this will eventually be handled by your error handling middleware
         next(e) 
     }
@@ -232,7 +216,6 @@ exports.viewGrocery = async (req, res, next) => {
 
 
   } catch (e) {
-     Raven.captureException(e);
     //this will eventually be handled by your error handling middleware
     next(e) 
   }
@@ -344,7 +327,6 @@ exports.shopping = async (req, res, next) => {
      ingredients = Grocery.convertDepartmentItems(grocery2);
 
   } catch (e) {
-     Raven.captureException(e);
     //this will eventually be handled by your error handling middleware
     next(e) 
   }
