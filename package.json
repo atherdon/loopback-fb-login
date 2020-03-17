@@ -29,7 +29,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "hoek": "^6.0.1",
-    "jest": "^23.4.2",
+    "jest": "^24.0.0",
     "loopback": "^3.23.2",
     "loopback-boot": "^3.2.0",
     "loopback-component-explorer": "^6.3.1",
