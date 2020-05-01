@@ -17,7 +17,9 @@
     "dev": "set NODE_ENV=staging && nodemon server/server.js",
     "test_win": "NODE_ENV=test && mocha --reporter spec",
     "test_unix": "NODE_ENV=test mocha --reporter spec",
-    "unix": "export NODE_ENV=development"
+    "unix": "export NODE_ENV=development",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -44,7 +46,8 @@
     "raven": "^2.6.3",
     "serve-favicon": "^2.5.0",
     "strong-error-handler": "^3.1.0",
-    "underscore": "^1.9.1"
+    "underscore": "^1.9.1",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "eslint": "^5.8.0",
@@ -61,5 +64,6 @@
   },
   "homepage": "https://github.com/GroceriStar/groceristar#readme",
   "author": "",
-  "description": "GroceriStar API"
+  "description": "GroceriStar API",
+  "snyk": true
 }
