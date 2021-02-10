@@ -43,7 +43,7 @@
     "pug": "^2.0.3",
     "raven": "^2.6.3",
     "serve-favicon": "^2.5.0",
-    "strong-error-handler": "^3.1.0",
+    "strong-error-handler": "^3.5.0",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
