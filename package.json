@@ -34,7 +34,7 @@
     "loopback-boot": "^3.2.0",
     "loopback-component-explorer": "^6.3.1",
     "loopback-component-passport": "^3.10.0",
-    "loopback-connector-mongodb": "^4.0.0",
+    "loopback-connector-mongodb": "^6.0.1",
     "loopback-mongo-aggregate-mixin": "^1.0.1",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
