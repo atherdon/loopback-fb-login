@@ -49,7 +49,7 @@
   "devDependencies": {
     "eslint": "^5.8.0",
     "eslint-config-loopback": "^11.0.0",
-    "nodemon": "^1.18.6"
+    "nodemon": "^2.0.12"
   },
   "repository": {
     "type": "git",
